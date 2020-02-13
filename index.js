@@ -93,18 +93,19 @@
  *         and returns a string like `Hello, my name is {name}`.
  *         where `{name}` is the name passed into `makeSmartPerson`.
  */
-function makeSmartPerson(firstName) {
-    const smartPerson = {
-        name: firstName,
-        sum(num1, num2) {
-            return num1 + num2
+function makeSmartPerson(name) {
+    return {
+        name: name,
+        sumMethod(num1, num2) {
+            return num1 + num2;
         }
-        speak() {
-            return "hello, my name is ()"
+        speakMethod() {
+            return "Hello, my name is " + firstName;
         }
     }
 }
 
+makeSmartPerson(chad)
 
 
 
