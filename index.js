@@ -244,29 +244,36 @@ function getCarInfoById(inventory, id) {
  */
 function sortCarInventory(inventory) {
     /* code here */
-    const list = inventory.sort(function(m1, m2) {
-        if (m1["car_year"] > m2["car_year"]) {
+    return inventory.sort((a, b) => {
+        let m1 = a.inventory.car_model.toUppercase();
+        let m2 = b.inventory.car_model.toUppercase();
+
+        if (m1.car_model > m2.car_model) {
             return 1;
         } else {
             return -1;
         }
     });
-    return list
 }
-console.log(list)
-    /**
-     * ### Challenge `getModelYears`
-     * 
-     * @instructions
-     * We need the years from every car in the inventory!
-     * getModelYears takes a single argument:
-     *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
-     * getModelYears returns an array containing all the 'car_year's in the inventory.
-     */
+
+
+
+/**
+ * ### Challenge `getModelYears`
+ * 
+ * @instructions
+ * We need the years from every car in the inventory!
+ * getModelYears takes a single argument:
+ *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
+ * getModelYears returns an array containing all the 'car_year's in the inventory.
+ */
 function getModelYears(inventory) {
     /* code here */
-    let byYear = inventory["car_years"];
-    return byYear
+    let byYear = [];
+    for (let i = 0; i < inventory.length; i++) {
+        byYear.push(inventory[i].car_year);
+    }
+    return byYear;
 }
 
 /**
@@ -283,8 +290,13 @@ function getModelYears(inventory) {
  */
 function getOlderCars(inventory, modelYear) {
     /* code here */
-    let newInventory = inventory["car_year"]
-        // return newInventory(sort)
+    let newInventory = [];
+    for (let i = 0; i < inventory.length; i++) {
+        if (inventory[i].car_year <= modelYear) {
+            newInventory.push(inventory[i]);
+        }
+        return newInventory
+    }
 
 }
 
@@ -301,79 +313,91 @@ function getOlderCars(inventory, modelYear) {
  */
 function getGermanCars(inventory) {
     /* code here */
-    let onlyMakes = inventory["car_make"];
-    // let germanCars = onlyMakes["Audi", "Mercedes-Benz", "Volkswagen", "BMW"]
-}
+    let germanCars = [];
 
-/**
- * ### Challenge refactor to arrow functions
- * 
- * @instructions
- * Create arrow function versions of the following commented-out functions:
- * 
- * const sum = function (a, b) {
- *   return a + b
- * }
- * const sum = (a,b) => a + b;
- * 
- * const addFive = function(num) {
- *    return num + 5
- * }
- * const addFive = (num) => num + 5;
- * 
- * const argTimesTwo = function (num) {
- *   return num * 2
- * }
- * const argTimesTwo = (num) => num * 2;
- */
-const sum = null;
-(a, b) => a + b;
-const addFive = null;
-(num) => num + 5;
-const argTimesTwo = null;
-(num) => num * 2;
+    for (let i = 0; i < inventory.length; i++) {
+        if (inventory[i] === "Audi"
+            inventory[i] === "Mercedes-Benz"
+            inventory[i] === "Volkswagen"
+            inventory[i] === "BMW") {
+            germanCars.push(inventory[i]);
+        }
+        return germanCars
+    }
 
-/**
- * ### Challenge `carMaker`
- * THIS ONE IS A STRETCH GOAL. ATTEMPT IT ONLY AFTER
- * COMPLETING ALL NON-STRETCH CHALLENGES IN THE REPOSITORY!
- * 
- * @instructions
- * This function takes a single odometer argument (a number) and returns an object.
- * The returned object has the following characteristics:
- *     it has an `odometer` property that contains the argument passed in.
- *     it has a `drive` method that takes a distance as its argument, and
- *         (1) causes the odometer in the object to be increased by the distance,
- *         (2) returns the updated value of the `odometer`.
- */
-function carMaker(odometer) {
-    /* code here */
-    // return {
-    //     odometer: odometer,
-    //     drive: function(distance)
-    // }
-}
 
-/// ////// END OF CHALLENGE /////////
-/// ////// END OF CHALLENGE /////////
-/// ////// END OF CHALLENGE /////////
-if (typeof exports !== 'undefined') {
-    // IGNORE: Test/Env Detected
-    // For Node/Non-browser test env
-    module.exports = module.exports || {}
-    if (addNumbers) { module.exports.addNumbers = addNumbers }
-    if (makePersonObject) { module.exports.makePersonObject = makePersonObject }
-    if (getName) { module.exports.getName = getName }
-    if (makeSmartPerson) { module.exports.makeSmartPerson = makeSmartPerson }
-    if (carMaker) { module.exports.carMaker = carMaker }
-    if (getCarInfoByIndex) { module.exports.getCarInfoByIndex = getCarInfoByIndex }
-    if (getLastCarInfo) { module.exports.getLastCarInfo = getLastCarInfo }
-    if (getCarInfoById) { module.exports.getCarInfoById = getCarInfoById }
-    if (sortCarInventory) { module.exports.sortCarInventory = sortCarInventory }
-    if (getModelYears) { module.exports.getModelYears = getModelYears }
-    if (getOlderCars) { module.exports.getOlderCars = getOlderCars }
-    if (getGermanCars) { module.exports.getGermanCars = getGermanCars }
-    if (sum) { module.exports.sum = sum }
-    if (addFive) { module.exports.addFive = addFive }
-    if (argTimesTwo) { module.exports.argTimesTwo = argTimesTwo }
-}
+    /**
+     * ### Challenge refactor to arrow functions
+     * 
+     * @instructions
+     * Create arrow function versions of the following commented-out functions:
+     * 
+     * const sum = function (a, b) {
+     *   return a + b
+     * }
+     * const sum = (a,b) => a + b;
+     * 
+     * const addFive = function(num) {
+     *    return num + 5
+     * }
+     * const addFive = (num) => num + 5;
+     * 
+     * const argTimesTwo = function (num) {
+     *   return num * 2
+     * }
+     * const argTimesTwo = (num) => num * 2;
+     */
+    const sum = null;
+    (a, b) => a + b;
+    const addFive = null;
+    (num) => num + 5;
+    const argTimesTwo = null;
+    (num) => num * 2;
+
+    /**
+     * ### Challenge `carMaker`
+     * THIS ONE IS A STRETCH GOAL. ATTEMPT IT ONLY AFTER
+     * COMPLETING ALL NON-STRETCH CHALLENGES IN THE REPOSITORY!
+     * 
+     * @instructions
+     * This function takes a single odometer argument (a number) and returns an object.
+     * The returned object has the following characteristics:
+     *     it has an `odometer` property that contains the argument passed in.
+     *     it has a `drive` method that takes a distance as its argument, and
+     *         (1) causes the odometer in the object to be increased by the distance,
+     *         (2) returns the updated value of the `odometer`.
+     */
+    function carMaker(odometer) {
+        /* code here */
+        return {
+            odometer: odometer,
+            drive: function(distance) {
+                let newOdometer = odometer + distance;
+                return newOdometer;
+            }
+        }
+    }
+
+    /// ////// END OF CHALLENGE /////////
+    /// ////// END OF CHALLENGE /////////
+    /// ////// END OF CHALLENGE /////////
+    if (typeof exports !== 'undefined') {
+        // IGNORE: Test/Env Detected
+        // For Node/Non-browser test env
+        module.exports = module.exports || {}
+        if (addNumbers) { module.exports.addNumbers = addNumbers }
+        if (makePersonObject) { module.exports.makePersonObject = makePersonObject }
+        if (getName) { module.exports.getName = getName }
+        if (makeSmartPerson) { module.exports.makeSmartPerson = makeSmartPerson }
+        if (carMaker) { module.exports.carMaker = carMaker }
+        if (getCarInfoByIndex) { module.exports.getCarInfoByIndex = getCarInfoByIndex }
+        if (getLastCarInfo) { module.exports.getLastCarInfo = getLastCarInfo }
+        if (getCarInfoById) { module.exports.getCarInfoById = getCarInfoById }
+        if (sortCarInventory) { module.exports.sortCarInventory = sortCarInventory }
+        if (getModelYears) { module.exports.getModelYears = getModelYears }
+        if (getOlderCars) { module.exports.getOlderCars = getOlderCars }
+        if (getGermanCars) { module.exports.getGermanCars = getGermanCars }
+        if (sum) { module.exports.sum = sum }
+        if (addFive) { module.exports.addFive = addFive }
+        if (argTimesTwo) { module.exports.argTimesTwo = argTimesTwo }
+    }
